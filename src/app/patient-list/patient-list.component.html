@@ -1,0 +1,111 @@
+<div class="mat-elevation-z8">
+
+
+  <!-- Patients Table -->
+  <h3>Patients</h3>
+  <ngx-datatable class="material patient-table"
+    [rows]="patients"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="'auto'">
+
+<ngx-datatable-column name="Patient ID" prop="id" ></ngx-datatable-column>
+
+<ngx-datatable-column name="First Name" prop="first_name">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{ row.first_name }}
+      </ng-template>
+    </ngx-datatable-column>
+    
+    <ngx-datatable-column name="Last Name" prop="last_name">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{ row.last_name }}
+      </ng-template>
+    </ngx-datatable-column>
+    
+    <ngx-datatable-column name="Gender" prop="gender">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{ row.gender }}
+      </ng-template>
+    </ngx-datatable-column>
+    
+    <ngx-datatable-column name="City" prop="city">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{ row.city }}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <!-- Actions Column -->
+    <ngx-datatable-column name="Actions">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <button mat-icon-button (click)="edit(row)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="delete(row)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button (click)="view(row)">
+          <mat-icon>visibility</mat-icon>
+        </button>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+
+  <!-- Cases Table -->
+  <h3 *ngIf="casesVisible">Cases</h3>
+
+  <ngx-datatable class="material cases-table"
+    [rows]="cases"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    *ngIf="casesVisible">
+
+    <ngx-datatable-column name="ID" prop="id"></ngx-datatable-column>
+    <ngx-datatable-column name="Patient ID" prop="patient_id"></ngx-datatable-column>
+    <ngx-datatable-column name="Location ID" prop="location_id"></ngx-datatable-column>
+    <ngx-datatable-column name="Category" prop="category"></ngx-datatable-column>
+    <ngx-datatable-column name="Purpose of Visit" prop="purpose_of_visit"></ngx-datatable-column>
+    <ngx-datatable-column name="Case Type" prop="case_type"></ngx-datatable-column>
+    <ngx-datatable-column name="Date of Admission" prop="doa"></ngx-datatable-column>
+    <ngx-datatable-column name="Insurance ID" prop="insurance_id"></ngx-datatable-column>
+    <ngx-datatable-column name="Firm ID" prop="firm_id"></ngx-datatable-column> 
+
+  </ngx-datatable>
+
+<!-- Appointments Table -->
+<h3 *ngIf="appointmentsVisible">Appointments</h3>
+<ngx-datatable class="material appointments-table"
+               [rows]="cases"
+               [columnMode]="'force'"
+               [headerHeight]="50"
+               [footerHeight]="50"
+               [rowHeight]="'auto'"
+               *ngIf="appointmentsVisible">
+  
+  <ngx-datatable-column name="Case ID" prop="id"></ngx-datatable-column>
+  <ngx-datatable-column name="Appointment Details" prop="appointments[0].appointment_date">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <div *ngIf="row.appointments && row.appointments.length > 0">
+        <div *ngFor="let appointment of row.appointments">
+          <div class="appointment-detail">
+            <div>Date: {{ appointment.appointment_date }}</div>
+            <div>Time: {{ appointment.appointment_time }}</div>
+            <div>Type: {{ appointment.appointment_type }}</div>
+            <div>Priority: {{ appointment.apt_priority }}</div>
+            <div>Comments: {{ appointment.comments }}</div>
+            <div>Doctor Name: {{ appointment.doctor.name }} | {{ appointment.doctor.specialty }}</div>
+            <div>Duration: {{ appointment.duration }}</div>
+          </div>
+          <hr> 
+        </div>
+      </div>
+      <div *ngIf="!row.appointments || row.appointments.length === 0">
+        No appointments
+      </div>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>
+</div>

@@ -1,0 +1,90 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.registration-card {
+  width: 290px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  margin-right: 20px; 
+}
+
+.registration-card form {
+  display: flex;
+  flex-direction: column;
+}
+
+.registration-card-title {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 32px;
+  color: #333;
+}
+
+button[type="submit"] {
+  background-color: #2196f3;
+  color: white; 
+}
+
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.mat-error {
+  color: #f44336;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 20px; /* Add some space between Register button and Login link */
+}
+
+.login-link a {
+  text-decoration: none;
+  color: #1976d2;
+  transition: color 0.3s ease;
+}
+
+.login-link a:hover {
+  color: #004ba0;
+}
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/assets/images/doctor.jpg') no-repeat center center fixed;
+  background-size: cover;
+  filter: blur(2px); /* Adjust the blur level as needed */
+  z-index: -1; /* Ensure it is behind the content */
+}
+/* Apply styles to the mat-form-field */
+.custom-form-field {
+  width: 100%; /* Adjust the width as needed */
+  margin-bottom: 20px; /* Add margin-bottom for spacing */
+}
+
+/* Apply styles to the mat-label */
+.custom-label {
+  color: #333; /* Set label color */
+}
+
+/* Apply styles to the mat-select */
+.custom-select {
+  width: 100%; /* Adjust the width as needed */
+  height: 40px; /* Set your desired height */
+  font-size: 16px; /* Set font size */
+}
+
+/* Apply styles to the mat-option */
+.custom-option {
+  font-size: 16px; /* Set font size */
+  line-height: 24px; /* Set line height */
+}

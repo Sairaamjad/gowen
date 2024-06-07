@@ -1,0 +1,40 @@
+<h3>Appointments</h3>
+<ngx-datatable class="material appointments-table"
+  [rows]="appointments"
+  [columnMode]="'force'"
+  [headerHeight]="50"
+  [footerHeight]="50"
+  [rowHeight]="'auto'">
+  
+  <ngx-datatable-column name="ID" prop="id">
+  </ngx-datatable-column>
+  
+  <ngx-datatable-column name="Case ID" prop="case_id">
+  </ngx-datatable-column>
+  
+  <ngx-datatable-column name="Doctor ID" prop="doctor_id">
+  </ngx-datatable-column>
+  
+  <ngx-datatable-column name="Location ID" prop="location_id">
+  </ngx-datatable-column>
+  
+  <ngx-datatable-column name="Appointment Date" prop="appointment_date">
+  </ngx-datatable-column>
+  
+  <ngx-datatable-column name="Appointment Time" prop="appointment_time">
+  </ngx-datatable-column>
+  
+  <ngx-datatable-column name="Appointment Type" prop="appointment_type">
+  </ngx-datatable-column>
+  
+  <ngx-datatable-column name="Priority" prop="apt_priority">
+  </ngx-datatable-column>
+  
+  <ngx-datatable-column name="Duration" prop="duration">
+  </ngx-datatable-column>
+  
+  <ngx-datatable-column name="Comments" prop="comments">
+  </ngx-datatable-column>
+  
+  
+</ngx-datatable>

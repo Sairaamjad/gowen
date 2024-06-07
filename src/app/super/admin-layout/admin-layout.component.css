@@ -1,0 +1,28 @@
+/* admin-layout.component.css */
+
+.sidenav-container {
+    height: 100%;
+    background-color:beige;
+    padding-top: 20px;
+  }
+  
+  .sidenav {
+    width: 200px; 
+    padding-top: 20px;
+    background-color:#3f51b5;/* Adjust width according to your design */
+  }
+  
+  .content {
+    margin-left: 250px;
+   /* Adjust margin to match sidenav width */
+  }
+  
+  /* Style for app-navbar */
+  app-navbar {
+    display: block;
+   
+  }
+  .sidenav a {
+    color: white; 
+    text-decoration: none;
+  }

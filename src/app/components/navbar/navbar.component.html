@@ -1,0 +1,17 @@
+<div class="navbar">
+  <ng-container *ngIf="isLoggedIn; else guestLinks">
+    <ng-container *ngIf="userRole == 'doctor'">
+      <button mat-button routerLink="/doctor" routerLinkActive="active">Doctor</button>
+      <button mat-button (click)="logout()">Logout</button>
+    </ng-container>
+    <ng-container *ngIf="userRole !== 'doctor'">
+      <button mat-button routerLink="/form" routerLinkActive="active">Form</button>
+      <button mat-button routerLink="/Plist" routerLinkActive="active">Patient List</button>
+      <button mat-button (click)="logout()">Logout</button>
+    </ng-container>
+  </ng-container>
+  <ng-template #guestLinks>
+    <button mat-button routerLink="/" routerLinkActive="active">Login</button>
+    <button mat-button routerLink="/register" routerLinkActive="active">Register</button>
+  </ng-template>
+</div>

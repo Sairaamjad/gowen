@@ -1,0 +1,346 @@
+<mat-horizontal-stepper [linear]="true" #stepper  [selectedIndex]="isProfileCompleted ? 1 : 0">
+    <!-- Step 1: Patient Information -->
+    <ng-template [ngIf]="!isProfileCompleted">
+    <mat-step [stepControl]="patientFormGroup" >
+      <form [formGroup]="patientFormGroup" (ngSubmit)="onSubmitPatient(stepper)">
+        <ng-template matStepLabel>Patient Information</ng-template>
+        <div class="form-row">
+          <mat-form-field>
+            <input matInput placeholder="First Name" formControlName="first_name">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Middle Name" formControlName="middle_name">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Last Name" formControlName="last_name">
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field>
+            <mat-label>Gender</mat-label>
+            <mat-select formControlName="gender">
+              <mat-option value="male">Male</mat-option>
+              <mat-option value="female">Female</mat-option>
+              <mat-option value="x">X</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Date of Birth" formControlName="dob">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="SSN" formControlName="ssn">
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field>
+            <input matInput placeholder="Home Phone" formControlName="home_phone">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Work Phone" formControlName="work_phone">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Cell Phone" formControlName="cell_phone">
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field>
+            <input matInput placeholder="Email" formControlName="email">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Address" formControlName="address">
+          </mat-form-field>
+
+        </div>
+        <div class="form-row">
+          <mat-form-field>
+            <input matInput placeholder="City" formControlName="city">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="State" formControlName="state">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Zip" formControlName="zip">
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-button matStepperNext>Save and Continue</button>
+        </div>
+      </form>
+    </mat-step>
+  </ng-template>
+   <!-- Step 2: Case Information -->
+   <ng-template [ngIf]="isProfileCompleted">
+    <mat-step [stepControl]="caseFormGroup">
+      <form [formGroup]="caseFormGroup" (ngSubmit)="onSubmitCase(stepper)">
+        <ng-template matStepLabel>Case Information</ng-template>
+  
+        <!-- Case Information Section 1-->
+        <div class="form-row">
+          <mat-form-field>
+            <mat-select placeholder="Select Practice Location" formControlName="name"  (selectionChange)="onLocationChange($event.value)">
+              <mat-option *ngFor="let location of locations" [value]="location.id">
+                {{ location.name }}
+              </mat-option>
+            </mat-select>         
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Category" formControlName="category">
+              <mat-option *ngFor="let category of categories" [value]="category">
+                {{ category }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Purpose of Visit" formControlName="purpose_of_visit">
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field>
+            <input matInput placeholder="DOA" [matDatepicker]="dobPicker" formControlName="doa">
+            <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+            <mat-datepicker #dobPicker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Case Type" formControlName="case_type">
+              <mat-option *ngFor="let caseType of caseTypes" [value]="caseType">
+                {{ caseType }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <!-- Firm Information Section 2 -->
+        <h3>Firm Information</h3>
+  <div class="form-row">
+   
+    <mat-form-field>
+      <mat-select placeholder="Select Firm Name" formControlName="firm_name" (selectionChange)="onFirmChange($event.value)">
+        <mat-option *ngFor="let firm of firms" [value]="firm.id">
+          {{ firm.firm_name }}
+        </mat-option>
+      </mat-select>
+    
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Select Location" formControlName="location">
+        <mat-option *ngFor="let firm of firms" [value]="firm.location">
+          {{ firm.location }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Select Street Address" formControlName="street_address">
+        <mat-option *ngFor="let firm of firms" [value]="firm.street_address">
+          {{ firm.street_address }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="form-row">
+    <mat-form-field>
+      <mat-select placeholder="Select City" formControlName="city">
+        <mat-option *ngFor="let firm of firms" [value]="firm.city">
+          {{ firm.city }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Select State" formControlName="state">
+        <mat-option *ngFor="let firm of firms" [value]="firm.state">
+          {{ firm.state }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Select Zip" formControlName="zip">
+        <mat-option *ngFor="let firm of firms" [value]="firm.zip">
+          {{ firm.zip }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <!-- Insurance Information Section 4 -->
+       <h3>Insurance Information</h3>
+       <div class="form-row">
+         <mat-form-field>
+           <mat-label>Insurance Name</mat-label>
+           <mat-select placeholder="Insurance Name" (selectionChange)="onInsuranceChange($event.value)">
+             <mat-option *ngFor="let insurance of insurances" [value]="insurance.id">{{ insurance.name }}</mat-option>
+           </mat-select>
+         </mat-form-field>
+         <mat-form-field>
+           <mat-label>Insurance Code</mat-label>
+           <mat-select formControlName="insuranceCode">
+             <mat-option *ngFor="let insurance of insurances" [value]="insurance.insurance_code">{{ insurance.insurance_code }}</mat-option>
+           </mat-select>
+         </mat-form-field>
+         <mat-form-field>
+           <mat-label>Location Code</mat-label>
+           <mat-select formControlName="locationCode">
+             <mat-option *ngFor="let insurance of insurances" [value]="insurance.location_code">{{ insurance.location_code }}</mat-option>
+           </mat-select>
+         </mat-form-field>
+       </div>
+       <div class="form-row">
+         <mat-form-field>
+           <mat-label>Street Address</mat-label>
+           <mat-select formControlName="streetAddressInsurance">
+             <mat-option *ngFor="let insurance of insurances" [value]="insurance.street_address">{{ insurance.street_address }}</mat-option>
+           </mat-select>
+         </mat-form-field>
+         <mat-form-field>
+           <mat-label>Suite/Floor</mat-label>
+           <mat-select formControlName="suiteFloorInsurance">
+             <mat-option *ngFor="let insurance of insurances" [value]="insurance.suite_floor">{{ insurance.suite_floor }}</mat-option>
+           </mat-select>
+         </mat-form-field>
+         <mat-form-field>
+           <mat-label>City</mat-label>
+           <mat-select formControlName="cityInsurance">
+             <mat-option *ngFor="let insurance of insurances" [value]="insurance.city">{{ insurance.city }}</mat-option>
+           </mat-select>
+         </mat-form-field>
+         <mat-form-field>
+           <mat-label>State</mat-label>
+           <mat-select formControlName="stateInsurance">
+             <mat-option *ngFor="let insurance of insurances" [value]="insurance.state">{{ insurance.state }}</mat-option>
+           </mat-select>
+         </mat-form-field>
+         <mat-form-field>
+           <mat-label>Zip</mat-label>
+           <mat-select formControlName="zipInsurance">
+             <mat-option *ngFor="let insurance of insurances" [value]="insurance.zip">{{ insurance.zip }}</mat-option>
+           </mat-select>
+         </mat-form-field>
+         <mat-form-field>
+           <mat-label>Email</mat-label>
+           <mat-select formControlName="emailInsurance">
+             <mat-option *ngFor="let insurance of insurances" [value]="insurance.email">{{ insurance.email }}</mat-option>
+           </mat-select>
+         </mat-form-field>
+         <mat-form-field>
+           <mat-label>Fax</mat-label>
+           <mat-select formControlName="faxInsurance">
+             <mat-option *ngFor="let insurance of insurances" [value]="insurance.fax">{{ insurance.fax }}</mat-option>
+           </mat-select>
+         </mat-form-field>
+         <mat-form-field>
+           <mat-label>Phone Number</mat-label>
+           <mat-select formControlName="phoneNumberInsurance">
+             <mat-option *ngFor="let insurance of insurances" [value]="insurance.phone_number">{{ insurance.phone_number }}</mat-option>
+           </mat-select>
+         </mat-form-field>
+         <mat-form-field>
+           <mat-label>Extension</mat-label>
+           <mat-select formControlName="extensionInsurance">
+             <mat-option *ngFor="let insurance of insurances" [value]="insurance.extension">{{ insurance.extension }}</mat-option>
+           </mat-select>
+         </mat-form-field>
+         <mat-form-field>
+           <mat-label>Cell Phone</mat-label>
+           <mat-select formControlName="cellPhoneInsurance">
+             <mat-option *ngFor="let insurance of insurances" [value]="insurance.cell_number">{{ insurance.cell_number }}</mat-option>
+           </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+  
+           <mat-label>Location Code</mat-label>
+           <mat-select formControlName="location_code">
+             <mat-option *ngFor="let insurance of insurances" [value]="insurance.location_code">{{ insurance.location_code }}</mat-option>
+           </mat-select>
+         </mat-form-field>
+       </div>
+       
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext >Save and Continue</button>
+        </div>
+      </form>
+    </mat-step>
+  </ng-template>
+  <!-- Step 3: Appointment Information -->
+  <mat-step [stepControl]="appointmentFormGroup">
+    <form [formGroup]="appointmentFormGroup" (ngSubmit)="onSubmitAppointment(stepper)">
+      <ng-template matStepLabel>Appointment Information</ng-template>
+      <div class="form-row">
+        <mat-form-field>
+          <input matInput [matDatepicker]="datePicker" placeholder="Appointment Date" formControlName="appointment_date">
+          <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+          <mat-datepicker #datePicker></mat-datepicker>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-select placeholder="Appointment Time" formControlName="appointment_time">
+            <mat-option *ngFor="let appointment_time of appointment_times" [value]="appointment_time">
+              {{appointment_time}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="form-row">
+        <mat-form-field>
+          <mat-select placeholder="Select Practice Location" formControlName="location_id" (selectionChange)="onLocationsChange($event.value)">
+            <mat-option *ngFor="let location of locations" [value]="location.id">
+              {{ location.name }}
+            </mat-option>
+          </mat-select>         
+        </mat-form-field>
+        
+     
+      </div>
+      <div class="form-row">
+        <mat-form-field>
+            <mat-select placeholder="Appointment Type" formControlName="appointment_type">
+              <mat-option *ngFor="let type of appointment_type" [value]="type">
+                {{ type }}
+              </mat-option>
+            </mat-select>
+                </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Duration (in minutes)" formControlName="duration">
+              <mat-option *ngFor="let duration of duration" [value]="duration">
+                {{ duration }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="form-group">
+            <mat-form-field>
+              <mat-select placeholder='Specialty Provider' formControlName="doctor_id" (selectionChange)="onDoctorChnage($event.value)">
+                <mat-option *ngFor="let doctor of doctors" [value]="doctor.id">{{ doctor.name }} | {{ doctor.specialty }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+      </div>
+      <div class="form-row">
+       
+          <mat-form-field>
+              <mat-select placeholder="Priority" formControlName="apt_priority">
+                <mat-option *ngFor="let priority of priorities" [value]="priority">
+                  {{ priority }}
+                </mat-option>
+              </mat-select>
+              
+          </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Comments" formControlName="comments">
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Save and Continue</button>
+      </div>
+    </form>
+  </mat-step>
+  
+  <!-- Final Step -->
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+  </mat-horizontal-stepper>
+  

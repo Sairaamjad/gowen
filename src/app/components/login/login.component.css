@@ -1,0 +1,81 @@
+/* login.component.css */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* Prevent scrolling */
+  font-family: 'Roboto', sans-serif;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/assets/images/doctor.jpg') no-repeat center center fixed;
+  background-size: cover;
+  filter: blur(2px); /* Adjust the blur level as needed */
+  z-index: -1; /* Ensure it is behind the content */
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.login-card {
+  width: 250px; /* Adjust width as needed */
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.login-card mat-card-title {
+  font-size: 24px;
+  color: #333;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px; /* Add space below the form */
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.form-field {
+  flex: 1;
+}
+
+button[type="submit"] {
+  background-color: #2196f3;
+  color: white;
+  margin-top: 20px;
+}
+
+.login-link {
+  margin-top: 20px; /* Add space above the link */
+  padding-top: 10px; /* Add padding to the top */
+  text-align: center; /* Align the link text to the center */
+}
+
+.login-link a {
+  color: #2196f3;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}

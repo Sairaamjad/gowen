@@ -1,0 +1,20 @@
+<div>
+    <!-- Patient listing table -->
+    <ngx-datatable
+      [rows]="patients"
+      [columns]="columns"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+    >
+      <!-- Action column for Edit and Delete -->
+      <ngx-datatable-column name="Actions" prop="actions" [sortable]="false">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <button mat-icon-button color="primary" (click)="editPatient(row)">edit</button>
+          <button mat-icon-button color="warn" (click)="deletePatient(row.id)">delete</button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+  
